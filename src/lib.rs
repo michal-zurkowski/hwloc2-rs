@@ -187,7 +187,7 @@ impl Topology {
             if ffi::hwloc_topology_init(&mut topo) == -1 {
                 return None
             }
-            ffi::hwloc_topology_set_flags(topo, final_flag);
+            ffi::hwloc_topology_set_flags(topo, final_flag.try_into().unwrap());
             if ffi::hwloc_topology_load(topo) == -1 {
                 ffi::hwloc_topology_destroy(topo);
                 return None
@@ -228,7 +228,7 @@ impl Topology {
         (0..64)
             .map(|x| (1 << x) & stored_flags)
             .filter(|&x| x > 0)
-            .map(|x| TopologyFlag::from_u64(x).unwrap())
+            .map(|x| TopologyFlag::from_u64(x.into()).unwrap())
             .collect::<Vec<TopologyFlag>>()
     }
 
