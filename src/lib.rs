@@ -99,6 +99,7 @@ pub use topology_object::{TopologyObject, TopologyObjectMemory};
 
 use num::{ToPrimitive, FromPrimitive};
 use errno::errno;
+use std::convert::TryInto;
 
 pub struct Topology {
     topo: *mut ffi::HwlocTopology,
